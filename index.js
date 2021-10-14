@@ -40,7 +40,7 @@ const employeeQuestions = () => {
         name: "choices",
         message: "What is the employees role?",
         type: "list",
-        choices: [, "Manager", "Engineer", "Intern"],
+        choices: ["Manager", "Engineer", "Intern"],
       },
     ])
     .then((answer) => {
