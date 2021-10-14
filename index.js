@@ -8,6 +8,7 @@ const fs = require("fs");
 
 let employeeList = [];
 
+// function that is the first to run
 const menu = () => {
   inquirer
     .prompt([
@@ -22,10 +23,12 @@ const menu = () => {
       const { choices } = answer;
       console.log(choices);
       if (choices == "add-employee") {
+        // employeeQuestions() creates employees
         employeeQuestions();
       } else if (choices == "finished") {
+        //finished takes data from the employee list, using generateHTML it takes in employee
         fs.writeFile("index.html", generateHTML(employeeList), (err) =>
-          err ? console.log(err) : console.log("HTML generated")
+          err ? console.log(err) : console.log("created")
         );
       } else {
         menu();
@@ -33,6 +36,7 @@ const menu = () => {
     });
 };
 
+// function that lists employee choices
 const employeeQuestions = () => {
   inquirer
     .prompt([
@@ -82,6 +86,7 @@ const manager = () => {
     ])
     .then((res) => {
       console.log(res);
+      //manager takes in response given to us in inquiry and pushes into the employee list
       let manager = new Manager(res.name, res.id, res.email, res.officeNumber);
       employeeList.push(manager);
       console.log(employeeList);
@@ -115,8 +120,9 @@ const engineer = () => {
     ])
     .then((res) => {
       console.log(res);
-      let manager = new Engineer(res.name, res.id, res.email, res.github);
-      employeeList.push(manager);
+      //engineer takes in response given to us in inquiry and pushes into the employee list
+      let engineer = new Engineer(res.name, res.id, res.email, res.github);
+      employeeList.push(engineer);
       console.log(employeeList);
       menu();
     });
@@ -148,6 +154,7 @@ const intern = () => {
     ])
     .then((res) => {
       console.log(res);
+      //intern takes in response given to us in inquiry and pushes into the employee list
       let intern = new Intern(res.name, res.id, res.email, res.school);
       employeeList.push(intern);
       console.log(employeeList);
